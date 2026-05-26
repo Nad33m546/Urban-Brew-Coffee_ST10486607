@@ -4,422 +4,442 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Order Online - Urban Brew Coffee</title>
+  <link rel="stylesheet" href="../CSS/style.css">
 </head>
-<body style="background-color: #f5f5dc; color: #8b4513; font-family: Arial, sans-serif; margin: 0; padding-top: 60px;">
-  <main style="padding: 20px;">
-    <form id="order-form" style="position:fixed; top:60px; width:100%; background:#fff8eb; padding:10px; border-bottom:1px solid #edd8c4; z-index:10;">
-      <div style="display:flex; gap:20px; align-items:center; flex-wrap:wrap;">
-        <label>Name: <input type="text" id="name" required style="padding:5px;"></label>
-        <label>Phone: <input type="tel" id="phone" required style="padding:5px;"></label>
-        <div>
-          <label>Pickup <input type="radio" name="delivery" value="pickup" checked></label>
-          <label>Drop-off <input type="radio" name="delivery" value="dropoff"></label>
-        </div>
-        <label id="address-label" style="display:none;">Address: <input type="text" id="address" style="padding:5px;"></label>
+<body class="ordering-page">
+  <form id="order-form">
+    <div class="form-row">
+      <div class="form-group">
+        <label>Name: <input type="text" id="name" required></label>
       </div>
-    </form>
+      <div class="form-group">
+        <label>Phone: <input type="tel" id="phone" required></label>
+      </div>
+      <div class="form-group">
+        <label>Pickup <input type="radio" name="delivery" value="pickup" checked></label>
+        <label>Drop-off <input type="radio" name="delivery" value="dropoff"></label>
+      </div>
+      <label id="address-label">Address: <input type="text" id="address"></label>
+    </div>
+  </form>
+
+  <main>
     <h1>Order Online</h1>
     <p>Promotions from 01 January 2026 till 07 January 2027. Hot chocolate and coffee typically cost R50. The price is lowered to R40 after a 20% promotional discount is applied. In the same way, pastries and snacks, which typically cost R20, are now only R18 due to a 10% discount.Cold beverages are only R10 and NO DISCOUNTS ON THE COLD BEVERAGES.AN ADDITIONAL R5 FOR DELIVERY FEES. </p>
 
-    <div style="background: #fff8eb; padding: 20px; border-radius: 18px; box-shadow: 0 4px 12px rgba(0,0,0,0.08);">
-      <section style="margin-bottom: 30px;">
-        <h2 style="margin-top: 0;">Coffee Drinks</h2>
-
-        <div style="display:flex; justify-content:space-between; align-items:center; padding:14px 0; border-bottom:1px solid #edd8c4;">
-          <div>
-            <h3 style="margin:0;">Espresso</h3>
-            <p style="margin: 4px 0;">Strong, bold, and concentrated.</p>
+    <div class="order-container">
+      <section class="order-section">
+        <h2>Coffee Drinks</h2>
+        <div class="order-item">
+          <div class="order-item-details">
+            <h3>Espresso</h3>
+            <p>Strong, bold, and concentrated.</p>
           </div>
-          <div style="display:flex; align-items:center; gap:10px;">
-            <button type="button" onclick="decreaseQty('espresso')" style="background:#8b4513; color:#f5f5dc; border:none; padding:6px 12px; border-radius:999px; cursor:pointer;">−</button>
-            <span id="qty-espresso">0</span>
-            <button type="button" onclick="increaseQty('espresso')" style="background:#8b4513; color:#f5f5dc; border:none; padding:6px 12px; border-radius:999px; cursor:pointer;">+</button>
-          </div>
-        </div>
-
-        <div style="display:flex; justify-content:space-between; align-items:center; padding:14px 0; border-bottom:1px solid #edd8c4;">
-          <div>
-            <h3 style="margin:0;">Latte</h3>
-            <p style="margin: 4px 0;">Smooth espresso with steamed milk.</p>
-          </div>
-          <div style="display:flex; align-items:center; gap:10px;">
-            <button type="button" onclick="decreaseQty('latte')" style="background:#8b4513; color:#f5f5dc; border:none; padding:6px 12px; border-radius:999px; cursor:pointer;">−</button>
-            <span id="qty-latte">0</span>
-            <button type="button" onclick="increaseQty('latte')" style="background:#8b4513; color:#f5f5dc; border:none; padding:6px 12px; border-radius:999px; cursor:pointer;">+</button>
+          <div class="order-qty-controls">
+            <button type="button" class="qty-button" onclick="decreaseQty('espresso')">−</button>
+            <span class="qty-display" id="qty-espresso">0</span>
+            <button type="button" class="qty-button" onclick="increaseQty('espresso')">+</button>
           </div>
         </div>
 
-        <div style="display:flex; justify-content:space-between; align-items:center; padding:14px 0; border-bottom:1px solid #edd8c4;">
-          <div>
-            <h3 style="margin:0;">Cold Brew</h3>
-            <p style="margin: 4px 0;">Rich, chilled coffee brewed slowly.</p>
+        <div class="order-item">
+          <div class="order-item-details">
+            <h3>Latte</h3>
+            <p>Smooth espresso with steamed milk.</p>
           </div>
-          <div style="display:flex; align-items:center; gap:10px;">
-            <button type="button" onclick="decreaseQty('cold-brew')" style="background:#8b4513; color:#f5f5dc; border:none; padding:6px 12px; border-radius:999px; cursor:pointer;">−</button>
-            <span id="qty-cold-brew">0</span>
-            <button type="button" onclick="increaseQty('cold-brew')" style="background:#8b4513; color:#f5f5dc; border:none; padding:6px 12px; border-radius:999px; cursor:pointer;">+</button>
-          </div>
-        </div>
-
-        <div style="display:flex; justify-content:space-between; align-items:center; padding:14px 0; border-bottom:1px solid #edd8c4;">
-          <div>
-            <h3 style="margin:0;">Cappuccino</h3>
-            <p style="margin: 4px 0;">Espresso with creamy milk foam.</p>
-          </div>
-          <div style="display:flex; align-items:center; gap:10px;">
-            <button type="button" onclick="decreaseQty('cappuccino')" style="background:#8b4513; color:#f5f5dc; border:none; padding:6px 12px; border-radius:999px; cursor:pointer;">−</button>
-            <span id="qty-cappuccino">0</span>
-            <button type="button" onclick="increaseQty('cappuccino')" style="background:#8b4513; color:#f5f5dc; border:none; padding:6px 12px; border-radius:999px; cursor:pointer;">+</button>
+          <div class="order-qty-controls">
+            <button type="button" class="qty-button" onclick="decreaseQty('latte')">−</button>
+            <span class="qty-display" id="qty-latte">0</span>
+            <button type="button" class="qty-button" onclick="increaseQty('latte')">+</button>
           </div>
         </div>
 
-        <div style="display:flex; justify-content:space-between; align-items:center; padding:14px 0; border-bottom:1px solid #edd8c4;">
-          <div>
-            <h3 style="margin:0;">Americano</h3>
-            <p style="margin: 4px 0;">Smooth espresso diluted with hot water.</p>
+        <div class="order-item">
+          <div class="order-item-details">
+            <h3>Cold Brew</h3>
+            <p>Rich, chilled coffee brewed slowly.</p>
           </div>
-          <div style="display:flex; align-items:center; gap:10px;">
-            <button type="button" onclick="decreaseQty('americano')" style="background:#8b4513; color:#f5f5dc; border:none; padding:6px 12px; border-radius:999px; cursor:pointer;">−</button>
-            <span id="qty-americano">0</span>
-            <button type="button" onclick="increaseQty('americano')" style="background:#8b4513; color:#f5f5dc; border:none; padding:6px 12px; border-radius:999px; cursor:pointer;">+</button>
-          </div>
-        </div>
-
-        <div style="display:flex; justify-content:space-between; align-items:center; padding:14px 0;">
-          <div>
-            <h3 style="margin:0;">Mocha</h3>
-            <p style="margin: 4px 0;">Chocolate espresso with steamed milk.</p>
-          </div>
-          <div style="display:flex; align-items:center; gap:10px;">
-            <button type="button" onclick="decreaseQty('mocha')" style="background:#8b4513; color:#f5f5dc; border:none; padding:6px 12px; border-radius:999px; cursor:pointer;">−</button>
-            <span id="qty-mocha">0</span>
-            <button type="button" onclick="increaseQty('mocha')" style="background:#8b4513; color:#f5f5dc; border:none; padding:6px 12px; border-radius:999px; cursor:pointer;">+</button>
-          </div>
-        </div>
-      </section>
-
-      <section style="margin-bottom: 30px;">
-        <h2 style="margin-top: 0;">Hot Chocolate</h2>
-
-        <div style="display:flex; justify-content:space-between; align-items:center; padding:14px 0; border-bottom:1px solid #edd8c4;">
-          <div>
-            <h3 style="margin:0;">Classic Hot Chocolate</h3>
-            <p style="margin: 4px 0;">Rich milk chocolate with whipped cream.</p>
-          </div>
-          <div style="display:flex; align-items:center; gap:10px;">
-            <button type="button" onclick="decreaseQty('classic-hc')" style="background:#8b4513; color:#f5f5dc; border:none; padding:6px 12px; border-radius:999px; cursor:pointer;">−</button>
-            <span id="qty-classic-hc">0</span>
-            <button type="button" onclick="increaseQty('classic-hc')" style="background:#8b4513; color:#f5f5dc; border:none; padding:6px 12px; border-radius:999px; cursor:pointer;">+</button>
+          <div class="order-qty-controls">
+            <button type="button" class="qty-button" onclick="decreaseQty('cold-brew')">−</button>
+            <span class="qty-display" id="qty-cold-brew">0</span>
+            <button type="button" class="qty-button" onclick="increaseQty('cold-brew')">+</button>
           </div>
         </div>
 
-        <div style="display:flex; justify-content:space-between; align-items:center; padding:14px 0; border-bottom:1px solid #edd8c4;">
-          <div>
-            <h3 style="margin:0;">White Hot Chocolate</h3>
-            <p style="margin: 4px 0;">Creamy white chocolate with steamed milk.</p>
+        <div class="order-item">
+          <div class="order-item-details">
+            <h3>Cappuccino</h3>
+            <p>Espresso with creamy milk foam.</p>
           </div>
-          <div style="display:flex; align-items:center; gap:10px;">
-            <button type="button" onclick="decreaseQty('white-hc')" style="background:#8b4513; color:#f5f5dc; border:none; padding:6px 12px; border-radius:999px; cursor:pointer;">−</button>
-            <span id="qty-white-hc">0</span>
-            <button type="button" onclick="increaseQty('white-hc')" style="background:#8b4513; color:#f5f5dc; border:none; padding:6px 12px; border-radius:999px; cursor:pointer;">+</button>
-          </div>
-        </div>
-
-        <div style="display:flex; justify-content:space-between; align-items:center; padding:14px 0; border-bottom:1px solid #edd8c4;">
-          <div>
-            <h3 style="margin:0;">Mexican Hot Chocolate</h3>
-            <p style="margin: 4px 0;">Spicy dark chocolate with cinnamon.</p>
-          </div>
-          <div style="display:flex; align-items:center; gap:10px;">
-            <button type="button" onclick="decreaseQty('mexican-hc')" style="background:#8b4513; color:#f5f5dc; border:none; padding:6px 12px; border-radius:999px; cursor:pointer;">−</button>
-            <span id="qty-mexican-hc">0</span>
-            <button type="button" onclick="increaseQty('mexican-hc')" style="background:#8b4513; color:#f5f5dc; border:none; padding:6px 12px; border-radius:999px; cursor:pointer;">+</button>
+          <div class="order-qty-controls">
+            <button type="button" class="qty-button" onclick="decreaseQty('cappuccino')">−</button>
+            <span class="qty-display" id="qty-cappuccino">0</span>
+            <button type="button" class="qty-button" onclick="increaseQty('cappuccino')">+</button>
           </div>
         </div>
 
-        <div style="display:flex; justify-content:space-between; align-items:center; padding:14px 0;">
-          <div>
-            <h3 style="margin:0;">Peppermint Hot Chocolate</h3>
-            <p style="margin: 4px 0;">Minty chocolate sweetness with cream.</p>
+        <div class="order-item">
+          <div class="order-item-details">
+            <h3>Americano</h3>
+            <p>Smooth espresso diluted with hot water.</p>
           </div>
-          <div style="display:flex; align-items:center; gap:10px;">
-            <button type="button" onclick="decreaseQty('peppermint-hc')" style="background:#8b4513; color:#f5f5dc; border:none; padding:6px 12px; border-radius:999px; cursor:pointer;">−</button>
-            <span id="qty-peppermint-hc">0</span>
-            <button type="button" onclick="increaseQty('peppermint-hc')" style="background:#8b4513; color:#f5f5dc; border:none; padding:6px 12px; border-radius:999px; cursor:pointer;">+</button>
+          <div class="order-qty-controls">
+            <button type="button" class="qty-button" onclick="decreaseQty('americano')">−</button>
+            <span class="qty-display" id="qty-americano">0</span>
+            <button type="button" class="qty-button" onclick="increaseQty('americano')">+</button>
+          </div>
+        </div>
+
+        <div class="order-item">
+          <div class="order-item-details">
+            <h3>Mocha</h3>
+            <p>Chocolate espresso with steamed milk.</p>
+          </div>
+          <div class="order-qty-controls">
+            <button type="button" class="qty-button" onclick="decreaseQty('mocha')">−</button>
+            <span class="qty-display" id="qty-mocha">0</span>
+            <button type="button" class="qty-button" onclick="increaseQty('mocha')">+</button>
           </div>
         </div>
       </section>
 
-      <section style="margin-bottom: 20px;">
-        <h2 style="margin-top: 0;">Pastries & Snacks</h2>
+      <section class="order-section">
+        <h2>Hot Chocolate</h2>
 
-        <div style="display:flex; justify-content:space-between; align-items:center; padding:14px 0; border-bottom:1px solid #edd8c4;">
-          <div>
-            <h3 style="margin:0;">Croissant</h3>
-            <p style="margin: 4px 0;">Flaky, buttery pastry baked fresh daily.</p>
+        <div class="order-item">
+          <div class="order-item-details">
+            <h3>Classic Hot Chocolate</h3>
+            <p>Rich milk chocolate with whipped cream.</p>
           </div>
-          <div style="display:flex; align-items:center; gap:10px;">
-            <button type="button" onclick="decreaseQty('croissant')" style="background:#8b4513; color:#f5f5dc; border:none; padding:6px 12px; border-radius:999px; cursor:pointer;">−</button>
-            <span id="qty-croissant">0</span>
-            <button type="button" onclick="increaseQty('croissant')" style="background:#8b4513; color:#f5f5dc; border:none; padding:6px 12px; border-radius:999px; cursor:pointer;">+</button>
+          <div class="order-qty-controls">
+            <button type="button" class="qty-button" onclick="decreaseQty('classic-hc')">−</button>
+            <span class="qty-display" id="qty-classic-hc">0</span>
+            <button type="button" class="qty-button" onclick="increaseQty('classic-hc')">+</button>
           </div>
         </div>
 
-        <div style="display:flex; justify-content:space-between; align-items:center; padding:14px 0; border-bottom:1px solid #edd8c4;">
-          <div>
-            <h3 style="margin:0;">Avocado Toast</h3>
-            <p style="margin: 4px 0;">Toasted bread topped with avocado and herbs.</p>
+        <div class="order-item">
+          <div class="order-item-details">
+            <h3>White Hot Chocolate</h3>
+            <p>Creamy white chocolate with steamed milk.</p>
           </div>
-          <div style="display:flex; align-items:center; gap:10px;">
-            <button type="button" onclick="decreaseQty('avocado-toast')" style="background:#8b4513; color:#f5f5dc; border:none; padding:6px 12px; border-radius:999px; cursor:pointer;">−</button>
-            <span id="qty-avocado-toast">0</span>
-            <button type="button" onclick="increaseQty('avocado-toast')" style="background:#8b4513; color:#f5f5dc; border:none; padding:6px 12px; border-radius:999px; cursor:pointer;">+</button>
-          </div>
-        </div>
-
-        <div style="display:flex; justify-content:space-between; align-items:center; padding:14px 0; border-bottom:1px solid #edd8c4;">
-          <div>
-            <h3 style="margin:0;">Blueberry Muffin</h3>
-            <p style="margin: 4px 0;">Moist muffin packed with fresh berries.</p>
-          </div>
-          <div style="display:flex; align-items:center; gap:10px;">
-            <button type="button" onclick="decreaseQty('blueberry-muffin')" style="background:#8b4513; color:#f5f5dc; border:none; padding:6px 12px; border-radius:999px; cursor:pointer;">−</button>
-            <span id="qty-blueberry-muffin">0</span>
-            <button type="button" onclick="increaseQty('blueberry-muffin')" style="background:#8b4513; color:#f5f5dc; border:none; padding:6px 12px; border-radius:999px; cursor:pointer;">+</button>
+          <div class="order-qty-controls">
+            <button type="button" class="qty-button" onclick="decreaseQty('white-hc')">−</button>
+            <span class="qty-display" id="qty-white-hc">0</span>
+            <button type="button" class="qty-button" onclick="increaseQty('white-hc')">+</button>
           </div>
         </div>
 
-        <div style="display:flex; justify-content:space-between; align-items:center; padding:14px 0; border-bottom:1px solid #edd8c4;">
-          <div>
-            <h3 style="margin:0;">Chocolate Chip Cookie</h3>
-            <p style="margin: 4px 0;">Warm cookie loaded with chocolate chips.</p>
+        <div class="order-item">
+          <div class="order-item-details">
+            <h3>Mexican Hot Chocolate</h3>
+            <p>Spicy dark chocolate with cinnamon.</p>
           </div>
-          <div style="display:flex; align-items:center; gap:10px;">
-            <button type="button" onclick="decreaseQty('choc-chip-cookie')" style="background:#8b4513; color:#f5f5dc; border:none; padding:6px 12px; border-radius:999px; cursor:pointer;">−</button>
-            <span id="qty-choc-chip-cookie">0</span>
-            <button type="button" onclick="increaseQty('choc-chip-cookie')" style="background:#8b4513; color:#f5f5dc; border:none; padding:6px 12px; border-radius:999px; cursor:pointer;">+</button>
-          </div>
-        </div>
-
-        <div style="display:flex; justify-content:space-between; align-items:center; padding:14px 0; border-bottom:1px solid #edd8c4;">
-          <div>
-            <h3 style="margin:0;">Scone</h3>
-            <p style="margin: 4px 0;">Buttery scone served warm.</p>
-          </div>
-          <div style="display:flex; align-items:center; gap:10px;">
-            <button type="button" onclick="decreaseQty('scone')" style="background:#8b4513; color:#f5f5dc; border:none; padding:6px 12px; border-radius:999px; cursor:pointer;">−</button>
-            <span id="qty-scone">0</span>
-            <button type="button" onclick="increaseQty('scone')" style="background:#8b4513; color:#f5f5dc; border:none; padding:6px 12px; border-radius:999px; cursor:pointer;">+</button>
+          <div class="order-qty-controls">
+            <button type="button" class="qty-button" onclick="decreaseQty('mexican-hc')">−</button>
+            <span class="qty-display" id="qty-mexican-hc">0</span>
+            <button type="button" class="qty-button" onclick="increaseQty('mexican-hc')">+</button>
           </div>
         </div>
 
-        <div style="display:flex; justify-content:space-between; align-items:center; padding:14px 0; border-bottom:1px solid #edd8c4;">
-          <div>
-            <h3 style="margin:0;">Cinnamon Roll</h3>
-            <p style="margin: 4px 0;">Soft roll swirled with cinnamon and icing.</p>
+        <div class="order-item">
+          <div class="order-item-details">
+            <h3>Peppermint Hot Chocolate</h3>
+            <p>Minty chocolate sweetness with cream.</p>
           </div>
-          <div style="display:flex; align-items:center; gap:10px;">
-            <button type="button" onclick="decreaseQty('cinnamon-roll')" style="background:#8b4513; color:#f5f5dc; border:none; padding:6px 12px; border-radius:999px; cursor:pointer;">−</button>
-            <span id="qty-cinnamon-roll">0</span>
-            <button type="button" onclick="increaseQty('cinnamon-roll')" style="background:#8b4513; color:#f5f5dc; border:none; padding:6px 12px; border-radius:999px; cursor:pointer;">+</button>
-          </div>
-        </div>
-
-        <div style="display:flex; justify-content:space-between; align-items:center; padding:14px 0; border-bottom:1px solid #edd8c4;">
-          <div>
-            <h3 style="margin:0;">Brownie</h3>
-            <p style="margin: 4px 0;">Fudgy brownie with rich chocolate flavor.</p>
-          </div>
-          <div style="display:flex; align-items:center; gap:10px;">
-            <button type="button" onclick="decreaseQty('brownie')" style="background:#8b4513; color:#f5f5dc; border:none; padding:6px 12px; border-radius:999px; cursor:pointer;">−</button>
-            <span id="qty-brownie">0</span>
-            <button type="button" onclick="increaseQty('brownie')" style="background:#8b4513; color:#f5f5dc; border:none; padding:6px 12px; border-radius:999px; cursor:pointer;">+</button>
-          </div>
-        </div>
-
-        <div style="display:flex; justify-content:space-between; align-items:center; padding:14px 0; border-bottom:1px solid #edd8c4;">
-          <div>
-            <h3 style="margin:0;">Macaron</h3>
-            <p style="margin: 4px 0;">Light meringue cookie with flavored filling.</p>
-          </div>
-          <div style="display:flex; align-items:center; gap:10px;">
-            <button type="button" onclick="decreaseQty('macaron')" style="background:#8b4513; color:#f5f5dc; border:none; padding:6px 12px; border-radius:999px; cursor:pointer;">−</button>
-            <span id="qty-macaron">0</span>
-            <button type="button" onclick="increaseQty('macaron')" style="background:#8b4513; color:#f5f5dc; border:none; padding:6px 12px; border-radius:999px; cursor:pointer;">+</button>
-          </div>
-        </div>
-
-        <div style="display:flex; justify-content:space-between; align-items:center; padding:14px 0;">
-          <div>
-            <h3 style="margin:0;">Eclair</h3>
-            <p style="margin: 4px 0;">Cream-filled pastry topped with chocolate glaze.</p>
-          </div>
-          <div style="display:flex; align-items:center; gap:10px;">
-            <button type="button" onclick="decreaseQty('eclair')" style="background:#8b4513; color:#f5f5dc; border:none; padding:6px 12px; border-radius:999px; cursor:pointer;">−</button>
-            <span id="qty-eclair">0</span>
-            <button type="button" onclick="increaseQty('eclair')" style="background:#8b4513; color:#f5f5dc; border:none; padding:6px 12px; border-radius:999px; cursor:pointer;">+</button>
+          <div class="order-qty-controls">
+            <button type="button" class="qty-button" onclick="decreaseQty('peppermint-hc')">−</button>
+            <span class="qty-display" id="qty-peppermint-hc">0</span>
+            <button type="button" class="qty-button" onclick="increaseQty('peppermint-hc')">+</button>
           </div>
         </div>
       </section>
 
-      <section style="margin-bottom: 30px;">
-        <h2 style="margin-top: 0;">Cold Beverages</h2>
+      <section class="order-section">
+        <h2>Pastries & Snacks</h2>
 
-        <div style="display:flex; justify-content:space-between; align-items:center; padding:14px 0; border-bottom:1px solid #edd8c4;">
-          <div>
-            <h3 style="margin:0;">Vanilla Freezo</h3>
-            <p style="margin: 4px 0;">Creamy vanilla frozen dessert.</p>
+        <div class="order-item">
+          <div class="order-item-details">
+            <h3>Croissant</h3>
+            <p>Flaky, buttery pastry baked fresh daily.</p>
           </div>
-          <div style="display:flex; align-items:center; gap:10px;">
-            <button type="button" onclick="decreaseQty('vanilla-freezo')" style="background:#8b4513; color:#f5f5dc; border:none; padding:6px 12px; border-radius:999px; cursor:pointer;">−</button>
-            <span id="qty-vanilla-freezo">0</span>
-            <button type="button" onclick="increaseQty('vanilla-freezo')" style="background:#8b4513; color:#f5f5dc; border:none; padding:6px 12px; border-radius:999px; cursor:pointer;">+</button>
+          <div class="order-qty-controls">
+            <button type="button" class="qty-button" onclick="decreaseQty('croissant')">−</button>
+            <span class="qty-display" id="qty-croissant">0</span>
+            <button type="button" class="qty-button" onclick="increaseQty('croissant')">+</button>
           </div>
         </div>
 
-        <div style="display:flex; justify-content:space-between; align-items:center; padding:14px 0; border-bottom:1px solid #edd8c4;">
-          <div>
-            <h3 style="margin:0;">Chocolate Freezo</h3>
-            <p style="margin: 4px 0;">Rich chocolate frozen treat.</p>
+        <div class="order-item">
+          <div class="order-item-details">
+            <h3>Avocado Toast</h3>
+            <p>Toasted bread topped with avocado and herbs.</p>
           </div>
-          <div style="display:flex; align-items:center; gap:10px;">
-            <button type="button" onclick="decreaseQty('chocolate-freezo')" style="background:#8b4513; color:#f5f5dc; border:none; padding:6px 12px; border-radius:999px; cursor:pointer;">−</button>
-            <span id="qty-chocolate-freezo">0</span>
-            <button type="button" onclick="increaseQty('chocolate-freezo')" style="background:#8b4513; color:#f5f5dc; border:none; padding:6px 12px; border-radius:999px; cursor:pointer;">+</button>
-          </div>
-        </div>
-
-        <div style="display:flex; justify-content:space-between; align-items:center; padding:14px 0; border-bottom:1px solid #edd8c4;">
-          <div>
-            <h3 style="margin:0;">Strawberry Freezo</h3>
-            <p style="margin: 4px 0;">Sweet strawberry frozen delight.</p>
-          </div>
-          <div style="display:flex; align-items:center; gap:10px;">
-            <button type="button" onclick="decreaseQty('strawberry-freezo')" style="background:#8b4513; color:#f5f5dc; border:none; padding:6px 12px; border-radius:999px; cursor:pointer;">−</button>
-            <span id="qty-strawberry-freezo">0</span>
-            <button type="button" onclick="increaseQty('strawberry-freezo')" style="background:#8b4513; color:#f5f5dc; border:none; padding:6px 12px; border-radius:999px; cursor:pointer;">+</button>
+          <div class="order-qty-controls">
+            <button type="button" class="qty-button" onclick="decreaseQty('avocado-toast')">−</button>
+            <span class="qty-display" id="qty-avocado-toast">0</span>
+            <button type="button" class="qty-button" onclick="increaseQty('avocado-toast')">+</button>
           </div>
         </div>
 
-        <div style="display:flex; justify-content:space-between; align-items:center; padding:14px 0; border-bottom:1px solid #edd8c4;">
-          <div>
-            <h3 style="margin:0;">Iced Tea</h3>
-            <p style="margin: 4px 0;">Refreshing chilled tea.</p>
+        <div class="order-item">
+          <div class="order-item-details">
+            <h3>Blueberry Muffin</h3>
+            <p>Moist muffin packed with fresh berries.</p>
           </div>
-          <div style="display:flex; align-items:center; gap:10px;">
-            <button type="button" onclick="decreaseQty('iced-tea')" style="background:#8b4513; color:#f5f5dc; border:none; padding:6px 12px; border-radius:999px; cursor:pointer;">−</button>
-            <span id="qty-iced-tea">0</span>
-            <button type="button" onclick="increaseQty('iced-tea')" style="background:#8b4513; color:#f5f5dc; border:none; padding:6px 12px; border-radius:999px; cursor:pointer;">+</button>
-          </div>
-        </div>
-
-        <div style="display:flex; justify-content:space-between; align-items:center; padding:14px 0; border-bottom:1px solid #edd8c4;">
-          <div>
-            <h3 style="margin:0;">Lemonade</h3>
-            <p style="margin: 4px 0;">Tangy citrus drink.</p>
-          </div>
-          <div style="display:flex; align-items:center; gap:10px;">
-            <button type="button" onclick="decreaseQty('lemonade')" style="background:#8b4513; color:#f5f5dc; border:none; padding:6px 12px; border-radius:999px; cursor:pointer;">−</button>
-            <span id="qty-lemonade">0</span>
-            <button type="button" onclick="increaseQty('lemonade')" style="background:#8b4513; color:#f5f5dc; border:none; padding:6px 12px; border-radius:999px; cursor:pointer;">+</button>
+          <div class="order-qty-controls">
+            <button type="button" class="qty-button" onclick="decreaseQty('blueberry-muffin')">−</button>
+            <span class="qty-display" id="qty-blueberry-muffin">0</span>
+            <button type="button" class="qty-button" onclick="increaseQty('blueberry-muffin')">+</button>
           </div>
         </div>
 
-        <div style="display:flex; justify-content:space-between; align-items:center; padding:14px 0; border-bottom:1px solid #edd8c4;">
-          <div>
-            <h3 style="margin:0;">Soda</h3>
-            <p style="margin: 4px 0;">Carbonated soft drink.</p>
+        <div class="order-item">
+          <div class="order-item-details">
+            <h3>Chocolate Chip Cookie</h3>
+            <p>Warm cookie loaded with chocolate chips.</p>
           </div>
-          <div style="display:flex; align-items:center; gap:10px;">
-            <button type="button" onclick="decreaseQty('soda')" style="background:#8b4513; color:#f5f5dc; border:none; padding:6px 12px; border-radius:999px; cursor:pointer;">−</button>
-            <span id="qty-soda">0</span>
-            <button type="button" onclick="increaseQty('soda')" style="background:#8b4513; color:#f5f5dc; border:none; padding:6px 12px; border-radius:999px; cursor:pointer;">+</button>
-          </div>
-        </div>
-
-        <div style="display:flex; justify-content:space-between; align-items:center; padding:14px 0; border-bottom:1px solid #edd8c4;">
-          <div>
-            <h3 style="margin:0;">Fruit Punch</h3>
-            <p style="margin: 4px 0;">Mixed fruit flavored drink.</p>
-          </div>
-          <div style="display:flex; align-items:center; gap:10px;">
-            <button type="button" onclick="decreaseQty('fruit-punch')" style="background:#8b4513; color:#f5f5dc; border:none; padding:6px 12px; border-radius:999px; cursor:pointer;">−</button>
-            <span id="qty-fruit-punch">0</span>
-            <button type="button" onclick="increaseQty('fruit-punch')" style="background:#8b4513; color:#f5f5dc; border:none; padding:6px 12px; border-radius:999px; cursor:pointer;">+</button>
+          <div class="order-qty-controls">
+            <button type="button" class="qty-button" onclick="decreaseQty('choc-chip-cookie')">−</button>
+            <span class="qty-display" id="qty-choc-chip-cookie">0</span>
+            <button type="button" class="qty-button" onclick="increaseQty('choc-chip-cookie')">+</button>
           </div>
         </div>
 
-        <div style="display:flex; justify-content:space-between; align-items:center; padding:14px 0; border-bottom:1px solid #edd8c4;">
-          <div>
-            <h3 style="margin:0;">Blue Raspberry Slush</h3>
-            <p style="margin: 4px 0;">Icy blue raspberry flavored slush.</p>
+        <div class="order-item">
+          <div class="order-item-details">
+            <h3>Scone</h3>
+            <p>Buttery scone served warm.</p>
           </div>
-          <div style="display:flex; align-items:center; gap:10px;">
-            <button type="button" onclick="decreaseQty('blue-raspberry-slush')" style="background:#8b4513; color:#f5f5dc; border:none; padding:6px 12px; border-radius:999px; cursor:pointer;">−</button>
-            <span id="qty-blue-raspberry-slush">0</span>
-            <button type="button" onclick="increaseQty('blue-raspberry-slush')" style="background:#8b4513; color:#f5f5dc; border:none; padding:6px 12px; border-radius:999px; cursor:pointer;">+</button>
-          </div>
-        </div>
-
-        <div style="display:flex; justify-content:space-between; align-items:center; padding:14px 0; border-bottom:1px solid #edd8c4;">
-          <div>
-            <h3 style="margin:0;">Cherry Slush</h3>
-            <p style="margin: 4px 0;">Sweet cherry blended slush.</p>
-          </div>
-          <div style="display:flex; align-items:center; gap:10px;">
-            <button type="button" onclick="decreaseQty('cherry-slush')" style="background:#8b4513; color:#f5f5dc; border:none; padding:6px 12px; border-radius:999px; cursor:pointer;">−</button>
-            <span id="qty-cherry-slush">0</span>
-            <button type="button" onclick="increaseQty('cherry-slush')" style="background:#8b4513; color:#f5f5dc; border:none; padding:6px 12px; border-radius:999px; cursor:pointer;">+</button>
+          <div class="order-qty-controls">
+            <button type="button" class="qty-button" onclick="decreaseQty('scone')">−</button>
+            <span class="qty-display" id="qty-scone">0</span>
+            <button type="button" class="qty-button" onclick="increaseQty('scone')">+</button>
           </div>
         </div>
 
-        <div style="display:flex; justify-content:space-between; align-items:center; padding:14px 0; border-bottom:1px solid #edd8c4;">
-          <div>
-            <h3 style="margin:0;">Lime Slush</h3>
-            <p style="margin: 4px 0;">Tangy lime frozen slush.</p>
+        <div class="order-item">
+          <div class="order-item-details">
+            <h3>Cinnamon Roll</h3>
+            <p>Soft roll swirled with cinnamon and icing.</p>
           </div>
-          <div style="display:flex; align-items:center; gap:10px;">
-            <button type="button" onclick="decreaseQty('lime-slush')" style="background:#8b4513; color:#f5f5dc; border:none; padding:6px 12px; border-radius:999px; cursor:pointer;">−</button>
-            <span id="qty-lime-slush">0</span>
-            <button type="button" onclick="increaseQty('lime-slush')" style="background:#8b4513; color:#f5f5dc; border:none; padding:6px 12px; border-radius:999px; cursor:pointer;">+</button>
+          <div class="order-qty-controls">
+            <button type="button" class="qty-button" onclick="decreaseQty('cinnamon-roll')">−</button>
+            <span class="qty-display" id="qty-cinnamon-roll">0</span>
+            <button type="button" class="qty-button" onclick="increaseQty('cinnamon-roll')">+</button>
           </div>
         </div>
 
-        <div style="display:flex; justify-content:space-between; align-items:center; padding:14px 0;">
-          <div>
-            <h3 style="margin:0;">Mixed Berry Slush</h3>
-            <p style="margin: 4px 0;">Blend of berries in icy slush.</p>
+        <div class="order-item">
+          <div class="order-item-details">
+            <h3>Brownie</h3>
+            <p>Fudgy brownie with rich chocolate flavor.</p>
           </div>
-          <div style="display:flex; align-items:center; gap:10px;">
-            <button type="button" onclick="decreaseQty('mixed-berry-slush')" style="background:#8b4513; color:#f5f5dc; border:none; padding:6px 12px; border-radius:999px; cursor:pointer;">−</button>
-            <span id="qty-mixed-berry-slush">0</span>
-            <button type="button" onclick="increaseQty('mixed-berry-slush')" style="background:#8b4513; color:#f5f5dc; border:none; padding:6px 12px; border-radius:999px; cursor:pointer;">+</button>
+          <div class="order-qty-controls">
+            <button type="button" class="qty-button" onclick="decreaseQty('brownie')">−</button>
+            <span class="qty-display" id="qty-brownie">0</span>
+            <button type="button" class="qty-button" onclick="increaseQty('brownie')">+</button>
+          </div>
+        </div>
+
+        <div class="order-item">
+          <div class="order-item-details">
+            <h3>Macaron</h3>
+            <p>Light meringue cookie with flavored filling.</p>
+          </div>
+          <div class="order-qty-controls">
+            <button type="button" class="qty-button" onclick="decreaseQty('macaron')">−</button>
+            <span class="qty-display" id="qty-macaron">0</span>
+            <button type="button" class="qty-button" onclick="increaseQty('macaron')">+</button>
+          </div>
+        </div>
+
+        <div class="order-item">
+          <div class="order-item-details">
+            <h3>Eclair</h3>
+            <p>Cream-filled pastry topped with chocolate glaze.</p>
+          </div>
+          <div class="order-qty-controls">
+            <button type="button" class="qty-button" onclick="decreaseQty('eclair')">−</button>
+            <span class="qty-display" id="qty-eclair">0</span>
+            <button type="button" class="qty-button" onclick="increaseQty('eclair')">+</button>
           </div>
         </div>
       </section>
 
-      <div style="background:#f3e5d0; padding:18px; border-radius:14px; border:1px solid #d3b38f;">
-        <div style="display:flex; justify-content:space-between; margin-bottom:10px;"><span>Total quantity:</span><span id="total-items">0</span></div>
-        <div style="display:flex; justify-content:space-between; margin-bottom:10px;"><span>Subtotal (excl. VAT):</span><span id="subtotal">R0.00</span></div>
-        <div id="delivery-fee-row" style="display:none; justify-content:space-between; margin-bottom:10px;"><span>Delivery fee:</span><span id="delivery-fee">R0.00</span></div>
-        <div style="display:flex; justify-content:space-between; margin-bottom:10px;"><span>VAT (10%):</span><span id="tax">R0.00</span></div>
-        <div style="display:flex; justify-content:space-between; font-weight:700; font-size:1.1rem;"><span>Total incl. VAT:</span><span id="total">R0.00</span></div>
+      <section class="order-section">
+        <h2>Cold Beverages</h2>
+
+        <div class="order-item">
+          <div class="order-item-details">
+            <h3>Vanilla Freezo</h3>
+            <p>Creamy vanilla frozen dessert.</p>
+          </div>
+          <div class="order-qty-controls">
+            <button type="button" class="qty-button" onclick="decreaseQty('vanilla-freezo')">−</button>
+            <span class="qty-display" id="qty-vanilla-freezo">0</span>
+            <button type="button" class="qty-button" onclick="increaseQty('vanilla-freezo')">+</button>
+          </div>
+        </div>
+
+        <div class="order-item">
+          <div class="order-item-details">
+            <h3>Chocolate Freezo</h3>
+            <p>Rich chocolate frozen treat.</p>
+          </div>
+          <div class="order-qty-controls">
+            <button type="button" class="qty-button" onclick="decreaseQty('chocolate-freezo')">−</button>
+            <span class="qty-display" id="qty-chocolate-freezo">0</span>
+            <button type="button" class="qty-button" onclick="increaseQty('chocolate-freezo')">+</button>
+          </div>
+        </div>
+
+        <div class="order-item">
+          <div class="order-item-details">
+            <h3>Strawberry Freezo</h3>
+            <p>Sweet strawberry frozen delight.</p>
+          </div>
+          <div class="order-qty-controls">
+            <button type="button" class="qty-button" onclick="decreaseQty('strawberry-freezo')">−</button>
+            <span class="qty-display" id="qty-strawberry-freezo">0</span>
+            <button type="button" class="qty-button" onclick="increaseQty('strawberry-freezo')">+</button>
+          </div>
+        </div>
+
+        <div class="order-item">
+          <div class="order-item-details">
+            <h3>Iced Tea</h3>
+            <p>Refreshing chilled tea.</p>
+          </div>
+          <div class="order-qty-controls">
+            <button type="button" class="qty-button" onclick="decreaseQty('iced-tea')">−</button>
+            <span class="qty-display" id="qty-iced-tea">0</span>
+            <button type="button" class="qty-button" onclick="increaseQty('iced-tea')">+</button>
+          </div>
+        </div>
+
+        <div class="order-item">
+          <div class="order-item-details">
+            <h3>Lemonade</h3>
+            <p>Tangy citrus drink.</p>
+          </div>
+          <div class="order-qty-controls">
+            <button type="button" class="qty-button" onclick="decreaseQty('lemonade')">−</button>
+            <span class="qty-display" id="qty-lemonade">0</span>
+            <button type="button" class="qty-button" onclick="increaseQty('lemonade')">+</button>
+          </div>
+        </div>
+
+        <div class="order-item">
+          <div class="order-item-details">
+            <h3>Soda</h3>
+            <p>Carbonated soft drink.</p>
+          </div>
+          <div class="order-qty-controls">
+            <button type="button" class="qty-button" onclick="decreaseQty('soda')">−</button>
+            <span class="qty-display" id="qty-soda">0</span>
+            <button type="button" class="qty-button" onclick="increaseQty('soda')">+</button>
+          </div>
+        </div>
+
+        <div class="order-item">
+          <div class="order-item-details">
+            <h3>Fruit Punch</h3>
+            <p>Mixed fruit flavored drink.</p>
+          </div>
+          <div class="order-qty-controls">
+            <button type="button" class="qty-button" onclick="decreaseQty('fruit-punch')">−</button>
+            <span class="qty-display" id="qty-fruit-punch">0</span>
+            <button type="button" class="qty-button" onclick="increaseQty('fruit-punch')">+</button>
+          </div>
+        </div>
+
+        <div class="order-item">
+          <div class="order-item-details">
+            <h3>Blue Raspberry Slush</h3>
+            <p>Icy blue raspberry flavored slush.</p>
+          </div>
+          <div class="order-qty-controls">
+            <button type="button" class="qty-button" onclick="decreaseQty('blue-raspberry-slush')">−</button>
+            <span class="qty-display" id="qty-blue-raspberry-slush">0</span>
+            <button type="button" class="qty-button" onclick="increaseQty('blue-raspberry-slush')">+</button>
+          </div>
+        </div>
+
+        <div class="order-item">
+          <div class="order-item-details">
+            <h3>Cherry Slush</h3>
+            <p>Sweet cherry blended slush.</p>
+          </div>
+          <div class="order-qty-controls">
+            <button type="button" class="qty-button" onclick="decreaseQty('cherry-slush')">−</button>
+            <span class="qty-display" id="qty-cherry-slush">0</span>
+            <button type="button" class="qty-button" onclick="increaseQty('cherry-slush')">+</button>
+          </div>
+        </div>
+
+        <div class="order-item">
+          <div class="order-item-details">
+            <h3>Lime Slush</h3>
+            <p>Tangy lime frozen slush.</p>
+          </div>
+          <div class="order-qty-controls">
+            <button type="button" class="qty-button" onclick="decreaseQty('lime-slush')">−</button>
+            <span class="qty-display" id="qty-lime-slush">0</span>
+            <button type="button" class="qty-button" onclick="increaseQty('lime-slush')">+</button>
+          </div>
+        </div>
+
+        <div class="order-item">
+          <div class="order-item-details">
+            <h3>Mixed Berry Slush</h3>
+            <p>Blend of berries in icy slush.</p>
+          </div>
+          <div class="order-qty-controls">
+            <button type="button" class="qty-button" onclick="decreaseQty('mixed-berry-slush')">−</button>
+            <span class="qty-display" id="qty-mixed-berry-slush">0</span>
+            <button type="button" class="qty-button" onclick="increaseQty('mixed-berry-slush')">+</button>
+          </div>
+        </div>
+      </section>
+
+      <div class="price-summary">
+        <div class="price-row">
+          <span>Total quantity:</span>
+          <span id="total-items">0</span>
+        </div>
+        <div class="price-row">
+          <span>Subtotal (excl. VAT):</span>
+          <span id="subtotal">R0.00</span>
+        </div>
+        <div id="delivery-fee-row" class="price-row">
+          <span>Delivery fee:</span>
+          <span id="delivery-fee">R0.00</span>
+        </div>
+        <div class="price-row">
+          <span>VAT (10%):</span>
+          <span id="tax">R0.00</span>
+        </div>
+        <div class="price-row total">
+          <span>Total incl. VAT:</span>
+          <span id="total">R0.00</span>
+        </div>
       </div>
 
-      <div style="margin-top: 25px; text-align:center;">
-        <button type="button" onclick="checkout()" style="background:#8b4513; color:#f5f5dc; border:none; padding:12px 22px; border-radius:999px; cursor:pointer; font-weight:700;">Complete Order</button>
+      <div class="checkout-container">
+        <button type="button" class="checkout-btn" onclick="checkout()">Complete Order</button>
       </div>
     </div>
   </main>
 
-  <footer style="position: fixed; top: 0; width: 100%; background-color: #8b4513; color: #f5f5dc; text-align: center; padding: 10px;">
+  <footer>
     <nav>
-      <a href="index.html" style="color: #f5f5dc; margin: 0 10px; text-decoration: none; padding: 6px 10px; border-radius: 6px;">Home</a>
-      <a href="about.html" style="color: #f5f5dc; margin: 0 10px; text-decoration: none; padding: 6px 10px; border-radius: 6px;">About Us</a>
-      <a href="gallery.html" style="color: #f5f5dc; margin: 0 10px; text-decoration: none; padding: 6px 10px; border-radius: 6px;">Gallery</a>
-      <a href="menu.html" style="color: #f5f5dc; margin: 0 10px; text-decoration: none; padding: 6px 10px; border-radius: 6px;">Menu</a>
-      <a href="ordering.html" style="background-color: #d2b48c; color: #3e2a14; margin: 0 10px; text-decoration: none; padding: 6px 10px; border-radius: 6px;">Order Online</a>
-      <a href="contact.html" style="color: #f5f5dc; margin: 0 10px; text-decoration: none; padding: 6px 10px; border-radius: 6px;">Contact Us</a>
+      <a href="index.html">Home</a>
+      <a href="about.html">About Us</a>
+      <a href="gallery.html">Gallery</a>
+      <a href="menu.html">Menu</a>
+      <a href="ordering.html" class="active">Order Online</a>
+      <a href="contact.html">Contact Us</a>
     </nav>
   </footer>
 
@@ -535,3 +555,4 @@
   </script>
 </body>
 </html>
+
