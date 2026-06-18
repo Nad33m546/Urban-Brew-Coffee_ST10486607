@@ -67,6 +67,16 @@
       <div>Skilled baristas crafting perfect drinks</div>
       <div>Fresh pastries and treats</div>
     </div>
+
+    <div class="lightbox" id="lightbox">
+      <button class="lightbox-close" id="lightboxClose" aria-label="Close lightbox">×</button>
+      <button class="lightbox-nav left" id="lightboxPrev" aria-label="Previous image">‹</button>
+      <div class="lightbox-content">
+        <img id="lightboxImage" src="" alt="">
+        <p class="lightbox-caption" id="lightboxCaption"></p>
+      </div>
+      <button class="lightbox-nav right" id="lightboxNext" aria-label="Next image">›</button>
+    </div>
   </main>
   
   <footer>
@@ -79,6 +89,66 @@
       <a href="contact.html">Contact Us</a>
     </nav>
   </footer>
+
+  <script>
+    (function () {
+      const galleryImages = Array.from(document.querySelectorAll('.gallery-item img'));
+      const lightbox = document.getElementById('lightbox');
+      const lightboxImage = document.getElementById('lightboxImage');
+      const lightboxCaption = document.getElementById('lightboxCaption');
+      const closeButton = document.getElementById('lightboxClose');
+      const prevButton = document.getElementById('lightboxPrev');
+      const nextButton = document.getElementById('lightboxNext');
+      let currentIndex = 0;
+
+      const items = galleryImages.map((img, index) => ({
+        src: img.src,
+        alt: img.alt,
+        caption: img.closest('.gallery-item').querySelector('p')?.textContent || img.alt,
+        index
+      }));
+
+      function openLightbox(index) {
+        currentIndex = index;
+        const item = items[currentIndex];
+        lightboxImage.src = item.src;
+        lightboxImage.alt = item.alt;
+        lightboxCaption.textContent = item.caption;
+        lightbox.classList.add('open');
+        document.body.style.overflow = 'hidden';
+      }
+
+      function closeLightbox() {
+        lightbox.classList.remove('open');
+        document.body.style.overflow = '';
+      }
+
+      function showIndex(index) {
+        const normalized = (index + items.length) % items.length;
+        openLightbox(normalized);
+      }
+
+      galleryImages.forEach((img, index) => {
+        img.style.cursor = 'pointer';
+        img.addEventListener('click', () => openLightbox(index));
+      });
+
+      closeButton.addEventListener('click', closeLightbox);
+      prevButton.addEventListener('click', () => showIndex(currentIndex - 1));
+      nextButton.addEventListener('click', () => showIndex(currentIndex + 1));
+      lightbox.addEventListener('click', event => {
+        if (event.target === lightbox) {
+          closeLightbox();
+        }
+      });
+      window.addEventListener('keydown', event => {
+        if (!lightbox.classList.contains('open')) return;
+        if (event.key === 'Escape') closeLightbox();
+        if (event.key === 'ArrowLeft') showIndex(currentIndex - 1);
+        if (event.key === 'ArrowRight') showIndex(currentIndex + 1);
+      });
+    })();
+  </script>
 </body>
 </html>
 
