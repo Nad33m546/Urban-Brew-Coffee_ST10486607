@@ -40,6 +40,52 @@ body.contact-page {
   background-color: #f5f5dc;
 }
 
+.contact-layout {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 32px;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+.contact-info,
+.contact-form {
+  flex: 1 1 45%;
+  min-width: 280px;
+}
+
+.contact-form {
+  max-width: 620px;
+}
+
+.contact-info {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.contact-section {
+  background: rgba(255, 248, 235, 0.9);
+  border: 1px solid #d3b38f;
+  border-radius: 16px;
+  padding: 18px;
+}
+
+.contact-section h2 {
+  margin-top: 0;
+}
+
+@media (max-width: 900px) {
+  .contact-layout {
+    flex-direction: column;
+  }
+
+  .contact-info,
+  .contact-form {
+    flex: 1 1 100%;
+  }
+}
+
 body.menu-page {
   background-image: url("../Images/Background pic of the menu page.jpeg");
   background-repeat: no-repeat;
