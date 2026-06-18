@@ -36,8 +36,6 @@ document.addEventListener('DOMContentLoaded', function () {
     field.errEl.textContent = '';
   }
  
-  // ---- Individual validators, each returns true/false ----
- 
   function validateFullName(showState = true) {
     const value = fields.fullName.el.value.trim();
     if (value.length === 0) {
@@ -116,7 +114,7 @@ document.addEventListener('DOMContentLoaded', function () {
     if (/[A-Z]/.test(value)) score++;
     if (/[0-9]/.test(value)) score++;
     if (/[^A-Za-z0-9]/.test(value)) score++;
-    return score; // 0–5
+    return score;
   }
  
   function updateStrengthMeter() {
@@ -205,8 +203,6 @@ document.addEventListener('DOMContentLoaded', function () {
     document.getElementById('bioCount').textContent = len + ' / 100';
   }
  
-  // ---- Wire up live validation (validate on blur, clear-on-type for errors) ----
- 
   fields.fullName.el.addEventListener('blur', () => validateFullName());
   fields.email.el.addEventListener('blur', () => validateEmail());
   fields.phone.el.addEventListener('blur', () => validatePhone());
@@ -218,12 +214,10 @@ document.addEventListener('DOMContentLoaded', function () {
   fields.password.el.addEventListener('input', updateStrengthMeter);
   fields.bio.el.addEventListener('input', updateBioCount);
  
-  // Re-validate confirm password live if user edits password after already confirming
   fields.password.el.addEventListener('input', () => {
     if (fields.confirmPassword.el.value.length > 0) validateConfirmPassword();
   });
  
-  // Clear error state as soon as user starts correcting a field
   Object.values(fields).forEach(field => {
     field.el.addEventListener('input', () => {
       if (field.el.classList.contains('error')) {
@@ -232,8 +226,6 @@ document.addEventListener('DOMContentLoaded', function () {
       }
     });
   });
- 
-  // ---- Form submission ----
  
   form.addEventListener('submit', function (e) {
     e.preventDefault();
@@ -254,9 +246,7 @@ document.addEventListener('DOMContentLoaded', function () {
     if (allValid) {
       successBanner.classList.add('show');
       successBanner.scrollIntoView({ behavior: 'smooth', block: 'center' });
-      // form.reset() and further submission logic (e.g. fetch to a server) goes here
     } else {
-      // Focus the first invalid field for accessibility
       const firstInvalid = form.querySelector('.error');
       if (firstInvalid) firstInvalid.focus();
     }
